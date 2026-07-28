@@ -132,6 +132,7 @@ export function AgentChat() {
         <div className="agent-loading">
           <LoaderCircle className="spin" />
           <p>{stage ? (STAGE_LABELS[stage] ?? "Building the outcome and creative contracts…") : "Building the outcome and creative contracts…"}</p>
+          <p className="agent-loading-hint">Free models can take 1–3 minutes. A paid model (e.g. gpt-4o-mini) responds in seconds.</p>
         </div>
       )}
 

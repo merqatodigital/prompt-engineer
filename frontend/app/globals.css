@@ -50,6 +50,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .agent-intro h2 { margin: 18px 0 8px; font-family: Georgia, serif; font-weight: 500; font-size: 30px; letter-spacing: -.03em; }
 .agent-intro p, .agent-loading p { color: var(--muted); }
 .agent-loading { gap: 14px; }
+.agent-loading-hint { font-size: 12px; color: var(--muted); opacity: .8; max-width: 320px; }
 .spin { animation: spin 1s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 

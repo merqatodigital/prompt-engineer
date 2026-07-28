@@ -22,7 +22,7 @@ class OpenRouterProvider:
             "temperature": self.temperature,
             "max_tokens": self.max_output_tokens,
         }
-        async with httpx.AsyncClient(timeout=120) as client:
+        async with httpx.AsyncClient(timeout=90) as client:
             response = await client.post(f"{self.base_url}/chat/completions", headers=self.headers, json=payload)
             response.raise_for_status()
         data = response.json()
