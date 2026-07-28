@@ -107,7 +107,7 @@ def validate_output_checks(content: str, artifact_type: str = "Other") -> list[s
         errors.append("Expected Output needs an explicit deliverable list")
     if "untrusted" not in content.lower():
         errors.append("Missing authority boundary for untrusted context or retrieved data")
-    if artifact_type in {"Landing Page", "Website", "Web Application"}:
+    if artifact_type in {"Landing Page", "Website"}:
         quality_terms = {
             "a named visual thesis": "visual thesis",
             "a primary CTA": "primary cta",
@@ -122,4 +122,17 @@ def validate_output_checks(content: str, artifact_type: str = "Other") -> list[s
         errors.extend(f"Missing design-grade requirement: {label}" for label, term in quality_terms.items() if term not in lowered)
         if len(content.split()) < 650:
             errors.append("Design prompt is too shallow: provide at least 650 words of executable UI direction")
+    elif artifact_type == "Web Application":
+        quality_terms = {
+            "a data model": "data model",
+            "input validation rules": "validation",
+            "an explicit calculation or formula specification": "formula",
+            "component interaction states": "states",
+            "44x44px touch targets": "44",
+            "WCAG AA accessibility": "wcag aa",
+        }
+        lowered = content.lower()
+        errors.extend(f"Missing web-app requirement: {label}" for label, term in quality_terms.items() if term not in lowered)
+        if len(content.split()) < 550:
+            errors.append("Web-app prompt is too shallow: provide at least 550 words of executable spec (state, data, formulas, validation, states)")
     return errors

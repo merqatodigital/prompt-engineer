@@ -60,7 +60,7 @@ def build_prompt_engineer_graph(generate: GenerateFunction, on_event: Callable[[
             errors.append("Expected Output needs an explicit deliverable list")
         if "untrusted" not in content.lower():
             errors.append("Missing authority boundary for untrusted context or retrieved data")
-        if state.get("artifact_type") in {"Landing Page", "Website", "Web Application"}:
+        if state.get("artifact_type") in {"Landing Page", "Website"}:
             quality_terms = {
                 "a named visual thesis": "visual thesis",
                 "a primary CTA": "primary cta",
@@ -75,6 +75,19 @@ def build_prompt_engineer_graph(generate: GenerateFunction, on_event: Callable[[
             errors.extend(f"Missing design-grade requirement: {label}" for label, term in quality_terms.items() if term not in lowered)
             if len(content.split()) < 650:
                 errors.append("Design prompt is too shallow: provide at least 650 words of executable UI direction")
+        elif state.get("artifact_type") == "Web Application":
+            quality_terms = {
+                "a data model": "data model",
+                "input validation rules": "validation",
+                "an explicit calculation or formula specification": "formula",
+                "component interaction states": "states",
+                "44x44px touch targets": "44",
+                "WCAG AA accessibility": "wcag aa",
+            }
+            lowered = content.lower()
+            errors.extend(f"Missing web-app requirement: {label}" for label, term in quality_terms.items() if term not in lowered)
+            if len(content.split()) < 550:
+                errors.append("Web-app prompt is too shallow: provide at least 550 words of executable spec (state, data, formulas, validation, states)")
         if errors:
             status = "quality_failed" if state.get("repair_count", 0) >= 1 else "repairing"
         elif state.get("provider") != "builtin" and not state.get("critique_completed"):
