@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary meta -->
+  <title>[Brand Name] — A Secluded Beachfront Retreat in San Vicente</title>
+  <meta name="description" content="A quiet beachfront retreat in San Vicente with four private units and an on-site restaurant. No crowds, no noise — just the sea and stillness." />
+  <meta name="keywords" content="secluded beachfront resort, San Vicente, private units, on-site restaurant, quiet retreat, Palawan" />
+  <meta name="author" content="[Brand Name]" />
+  <meta name="theme-color" content="#1A2A3A" />
+  <link rel="canonical" href="https://www.example.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="[Brand Name] — A Secluded Beachfront Retreat in San Vicente" />
+  <meta property="og:description" content="Four private units, an on-site restaurant, and the beach to yourself. A quiet beachfront retreat in San Vicente." />
+  <meta property="og:image" content="/assets/hero.jpg" />
+  <meta property="og:url" content="https://www.example.com/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="[Brand Name] — A Secluded Beachfront Retreat in San Vicente" />
+  <meta name="twitter:description" content="Four private units, an on-site restaurant, and the beach to yourself. A quiet beachfront retreat in San Vicente." />
+
+  <!-- Favicon (inline SVG data URI) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231A2A3A'/%3E%3Cpath d='M4 22 Q16 6 28 22' stroke='%23C47A6A' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='14' r='3' fill='%23FFFDF7'/%3E%3C/svg%3E" />
+
+  <style>
+    :root {
+      --color-sand: #F5F0E8;
+      --color-deep-sea: #1A2A3A;
+      --color-warm-white: #FFFDF7;
+      --color-accent: #C47A6A;
+      --font-heading: Georgia, "Times New Roman", serif;
+      --font-body: "Helvetica Neue", Arial, sans-serif;
+      --space-section: clamp(56px, 9vw, 96px);
+      --max-content-width: 900px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--color-sand);
+      color: var(--color-deep-sea);
+      font-family: var(--font-body);
+      font-size: clamp(1.05rem, 0.98rem + 0.4vw, 1.2rem);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-heading);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+    h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); }
+    h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
+
+    p { max-width: 62ch; }
+
+    section {
+      padding-block: var(--space-section);
+      padding-inline: clamp(20px, 5vw, 48px);
+      scroll-margin-top: 40px;
+    }
+
+    .wrap {
+      max-width: var(--max-content-width);
+      margin-inline: auto;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 78vh;
+      aspect-ratio: 16 / 10;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: #0e1822 url("/assets/hero.jpg") center / cover no-repeat;
+      color: var(--color-warm-white);
+      padding-inline: clamp(20px, 5vw, 48px);
+      scroll-margin-top: 40px;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(14,24,34,.35), rgba(14,24,34,.55));
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero h1 { color: var(--color-warm-white); margin: 0 0 .4em; }
+    .hero .tagline { font-size: clamp(1.1rem, 2vw, 1.4rem); margin: 0 0 1.6em; opacity: .92; }
+
+    /* Buttons */
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      min-width: 44px;
+      padding: 14px 28px;
+      border: 0;
+      border-radius: 4px;
+      background: var(--color-deep-sea);
+      color: var(--color-warm-white);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      letter-spacing: .02em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease-in-out;
+    }
+    .cta:hover,
+    .cta:focus-visible {
+      background: var(--color-accent);
+      transform: translateY(-2px);
+      outline: 2px solid var(--color-deep-sea);
+      outline-offset: 2px;
+    }
+
+    /* About */
+    .about { background: var(--color-sand); }
+    .about p { margin-inline: auto; }
+
+    /* Units */
+    .units { background: var(--color-warm-white); }
+    .unit {
+      display: grid;
+      grid-template-columns: 40% 60%;
+      gap: clamp(24px, 4vw, 48px);
+      align-items: center;
+      margin-block: clamp(32px, 5vw, 56px);
+    }
+    .unit:nth-child(even) .unit-image { order: 2; }
+    .unit-image {
+      aspect-ratio: 4 / 3;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+      background: #ddd6cb;
+    }
+    .unit h3 { margin: 0 0 .3em; }
+    .unit .lede { margin: 0 0 1em; }
+    .unit ul { margin: 0; padding-left: 1.1em; }
+    .unit li { margin-block: .3em; }
+
+    /* Restaurant */
+    .restaurant { background: #efe7d8; }
+    .restaurant .highlight { margin-block: .6em; }
+    .restaurant .note { font-style: italic; opacity: .85; }
+
+    /* Booking */
+    .booking { background: var(--color-sand); }
+    form { max-width: 520px; margin-top: 1.5em; }
+    .field { display: flex; flex-direction: column; margin-bottom: 1.1em; }
+    .field label { font-size: .95rem; margin-bottom: .4em; }
+    .field input,
+    .field textarea {
+      min-height: 44px;
+      padding: 12px 14px;
+      border: 1px solid #c9bfb0;
+      border-radius: 4px;
+      background: var(--color-warm-white);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--color-deep-sea);
+      transition: outline 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    }
+    .field input:focus,
+    .field textarea:focus {
+      outline: 2px solid var(--color-deep-sea);
+      outline-offset: 2px;
+      border-color: var(--color-deep-sea);
+    }
+    .field :user-invalid {
+      border-color: #b3402e;
+      outline: 2px solid #b3402e;
+      outline-offset: 2px;
+    }
+    .contact-line { margin-top: 1.4em; font-size: .95rem; opacity: .85; }
+    .copyright { margin-top: 2.4em; font-size: .8rem; opacity: .6; text-align: center; }
+
+    @media (max-width: 600px) {
+      .unit { grid-template-columns: 1fr; }
+      .unit:nth-child(even) .unit-image { order: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .cta { transition: none; }
+      .cta:hover, .cta:focus-visible { transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <!-- 1. HERO -->
+    <header class="hero" role="region" aria-labelledby="hero-title">
+      <div class="wrap">
+        <h1 id="hero-title">[Brand Name]</h1>
+        <p class="tagline">Where the sea meets your quiet.</p>
+        <a class="cta" href="#booking">Begin Your Stay</a>
+      </div>
+    </header>
+
+    <!-- 2. ABOUT -->
+    <section class="about" id="about" role="region" aria-labelledby="about-title">
+      <div class="wrap">
+        <h2 id="about-title">Where the Crowd Ends</h2>
+        <p>This is a place you reach by leaving the road behind. The last stretch is unpaved, and then there is only the sound of water on the shore.</p>
+        <p>There are no other resorts here, no music drifting from a neighbouring bar. What you hear at night is what was always here — wind, tide, and the occasional call of a bird.</p>
+        <p>The beach in front of you is yours for the length of your stay. No loungers lined in rows, no one selling anything. Just the sand, the reef, and the quiet.</p>
+      </div>
+    </section>
+
+    <!-- 3. UNITS -->
+    <section class="units" id="units" role="region" aria-labelledby="units-title">
+      <div class="wrap">
+        <h2 id="units-title">Four Homes, Four Views</h2>
+
+        <article class="unit">
+          <img class="unit-image" src="/assets/unit-1.jpg" alt="The Drift House: a single unit facing the open reef" loading="lazy" decoding="async" />
+          <div>
+            <h3>The Drift House</h3>
+            <p class="lede">A low timber shelter angled toward the reef, built for slow mornings.</p>
+            <ul>
+              <li>King bed facing the reef</li>
+              <li>Outdoor rain shower under the palms</li>
+              <li>Private deck with a hammock</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="unit">
+          <img class="unit-image" src="/assets/unit-2.jpg" alt="The Tide Room: a corner unit with a reading nook" loading="lazy" decoding="async" />
+          <div>
+            <h3>The Tide Room</h3>
+            <p class="lede">Tucked at the bend of the shore, with a window seat made for the afternoon.</p>
+            <ul>
+              <li>Queen bed by a garden window</li>
+              <li>Reading nook with a single armchair</li>
+              <li>Open-air courtyard with a daybed</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="unit">
+          <img class="unit-image" src="/assets/unit-3.jpg" alt="The Shore Cabin: a freestanding cabin steps from the sand" loading="lazy" decoding="async" />
+          <div>
+            <h3>The Shore Cabin</h3>
+            <p class="lede">The closest thing to sleeping on the beach without leaving the roof on.</p>
+            <ul>
+              <li>King bed three steps from the sand</li>
+              <li>Outdoor dining table for two</li>
+              <li>Private path to the water</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="unit">
+          <img class="unit-image" src="/assets/unit-4.jpg" alt="The Palm Suite: a larger unit set among the trees" loading="lazy" decoding="async" />
+          <div>
+            <h3>The Palm Suite</h3>
+            <p class="lede">Set back among the trees, for when you want the shade more than the view.</p>
+            <ul>
+              <li>King bed beneath a fan of palm fronds</li>
+              <li>Soaking tub by a louvered wall</li>
+              <li>Private garden with a daybed</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 4. RESTAURANT -->
+    <section class="restaurant" id="restaurant" role="region" aria-labelledby="restaurant-title">
+      <div class="wrap">
+        <h2 id="restaurant-title">The Kitchen Here Is Simple</h2>
+        <p class="highlight">Catch of the day, grilled over coconut husk and served with lime.</p>
+        <p class="highlight">Rice grown nearby, steamed with lemongrass and topped with herbs from the garden.</p>
+        <p class="highlight">Fruit picked that morning, chilled and cut at the table.</p>
+        <p class="note">Dinner is served open-air, by the water, by candlelight. Ask about dinner when you book.</p>
+      </div>
+    </section>
+
+    <!-- 5. BOOKING -->
+    <section class="booking" id="booking" role="region" aria-labelledby="booking-title">
+      <div class="wrap">
+        <h2 id="booking-title">Let Us Know You're Coming</h2>
+        <form action="mailto:hello@example.com" method="post" enctype="text/plain">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required />
+          </div>
+          <div class="field">
+            <label for="dates">Dates</label>
+            <input id="dates" name="dates" type="text" placeholder="e.g. 12–18 April" required />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4"></textarea>
+          </div>
+          <button class="cta" type="submit">Send Request</button>
+        </form>
+        <p class="contact-line">Or write to us at hello@example.com · +63 000 000 0000</p>
+        <p class="copyright">[Brand Name] © 2025</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
