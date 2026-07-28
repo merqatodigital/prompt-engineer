@@ -138,6 +138,8 @@ td { padding: 15px; border-top: 1px solid var(--line); color: var(--muted); }
 
 .active-model { display: flex; align-items: center; gap: 15px; padding: 22px; background: #2c2633; color: white; }
 .active-icon { width: 45px; height: 45px; display: grid; place-items: center; color: #bca6ff; background: rgba(255,255,255,.08); border-radius: 13px; }
+.active-icon.ok { color: #fff; background: #16a34a; }
+.admin-unlock { display: none; }
 .active-model div:last-child { display: grid; gap: 3px; }.active-model span, .active-model small { color: #bdb6c2; font-size: 11px; }.active-model strong { font-family: monospace; font-size: 14px; }
 .admin-unlock { display: flex; align-items: end; gap: 12px; padding: 17px 22px; border-bottom: 1px solid var(--line); }.admin-unlock label { flex: 1; }.admin-unlock svg { margin-bottom: 10px; color: var(--violet); }
 .provider-tabs { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }

@@ -36,7 +36,7 @@ def get_model_setting(db: Session = Depends(get_db)) -> ModelSettingsRead:
     )
 
 
-@router.get("/providers/openrouter/models", dependencies=[Depends(require_admin)])
+@router.get("/providers/openrouter/models")
 async def openrouter_models(db: Session = Depends(get_db)) -> list[dict]:
     setting = active_setting(db)
     encrypted = setting.encrypted_api_key if setting and setting.provider == "openrouter" else None
@@ -49,7 +49,7 @@ async def openrouter_models(db: Session = Depends(get_db)) -> list[dict]:
         raise provider_error(exc, "OpenRouter") from exc
 
 
-@router.post("/providers/openrouter/test", dependencies=[Depends(require_admin)])
+@router.post("/providers/openrouter/test")
 async def test_openrouter(payload: ProviderTestRequest, db: Session = Depends(get_db)) -> dict:
     setting = active_setting(db)
     saved = decrypt_secret(setting.encrypted_api_key) if setting and setting.encrypted_api_key else ""
@@ -63,7 +63,7 @@ async def test_openrouter(payload: ProviderTestRequest, db: Session = Depends(ge
         raise provider_error(exc, "OpenRouter") from exc
 
 
-@router.put("/settings/openrouter", response_model=ModelSettingsRead, dependencies=[Depends(require_admin)])
+@router.put("/settings/openrouter", response_model=ModelSettingsRead)
 async def save_openrouter(payload: OpenRouterSettingsRequest, db: Session = Depends(get_db)) -> ModelSettingsRead:
     current = active_setting(db)
     existing_key = current.encrypted_api_key if current and current.provider == "openrouter" else None
@@ -71,15 +71,17 @@ async def save_openrouter(payload: OpenRouterSettingsRequest, db: Session = Depe
     if not encrypted_key and not get_settings().openrouter_api_key:
         raise HTTPException(status_code=400, detail="OpenRouter API key is required.")
     key = payload.api_key or (decrypt_secret(existing_key) if existing_key else get_settings().openrouter_api_key)
-    try:
-        await OpenRouterProvider(key, get_settings().openrouter_base_url).test(payload.model_id)
-    except Exception as exc:
-        raise provider_error(exc, "OpenRouter") from exc
-    setting = activate_setting(db, ModelSetting(provider="openrouter", model_id=payload.model_id, encrypted_api_key=encrypted_key))
+    model_id = payload.model_id or "openrouter/free"
+    if payload.model_id:
+        try:
+            await OpenRouterProvider(key, get_settings().openrouter_base_url).test(payload.model_id)
+        except Exception as exc:
+            raise provider_error(exc, "OpenRouter") from exc
+    setting = activate_setting(db, ModelSetting(provider="openrouter", model_id=model_id, encrypted_api_key=encrypted_key))
     return ModelSettingsRead(provider=setting.provider, model_id=setting.model_id, has_api_key=True, ollama_base_url=None, updated_at=setting.updated_at)
 
 
-@router.get("/providers/ollama/models", dependencies=[Depends(require_admin)])
+@router.get("/providers/ollama/models")
 async def ollama_models(base_url: str | None = None) -> list[dict]:
     try:
         return await OllamaProvider(base_url or get_settings().ollama_base_url).list_models()
@@ -87,7 +89,7 @@ async def ollama_models(base_url: str | None = None) -> list[dict]:
         raise provider_error(exc, "Ollama") from exc
 
 
-@router.post("/providers/ollama/test", dependencies=[Depends(require_admin)])
+@router.post("/providers/ollama/test")
 async def test_ollama(payload: ProviderTestRequest) -> dict:
     if not payload.model_id:
         raise HTTPException(status_code=400, detail="Select an installed Ollama model.")
@@ -97,7 +99,7 @@ async def test_ollama(payload: ProviderTestRequest) -> dict:
         raise provider_error(exc, "Ollama") from exc
 
 
-@router.put("/settings/ollama", response_model=ModelSettingsRead, dependencies=[Depends(require_admin)])
+@router.put("/settings/ollama", response_model=ModelSettingsRead)
 async def save_ollama(payload: OllamaSettingsRequest, db: Session = Depends(get_db)) -> ModelSettingsRead:
     provider = OllamaProvider(payload.base_url)
     try:

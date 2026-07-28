@@ -71,7 +71,7 @@ class PromptTestRead(BaseModel):
 
 class OpenRouterSettingsRequest(BaseModel):
     api_key: str | None = Field(default=None, min_length=10)
-    model_id: str = Field(min_length=1)
+    model_id: str | None = Field(default=None, min_length=1)
 
 
 class OllamaSettingsRequest(BaseModel):
